@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Demo</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0,user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="format-detection" content="telephone=no">
+	<style>
+		a {
+		display: block;
+		padding: 10px;
+		margin: 20px;
+		background: yellow;
+		}
+	</style>
+  </head>
+
+  <body>
+  <h1><center>mkopenurl demo</center></h1>
+	<a class="btn common-blue-btn" href="javascript:;" onclick="test('mkopenurl://?target=1&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult')">js:location.href</a>
+	<a class="btn common-blue-btn" href="javascript:;" onclick="test('mkopenurl://?target=1&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult', true)">js:iframe</a>
+	<a class="btn common-blue-btn" href="mkopenurl://?target=1&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult">a:href</a>
+	<script>
+	  //方法样例
+	  function test(url, iframe = false) {
+			if (iframe) {
+				const iframe = document.createElement('iframe');
+				iframe.style.position = 'absolute';
+				iframe.style.top = '0';
+				iframe.style.left = '0';
+				iframe.style.width = '1px';
+				iframe.style.height = '1px';
+				iframe.style.opacity = '0';
+				iframe.style.visibility = 'hidden';
+				iframe.src = url;
+				document.body.appendChild(iframe);
+				setTimeout(() => {
+					document.body.removeChild(iframe);
+				}, 2000);
+			} else {
+				location.href = url;
+			}
+    }
+  </script>
+</body>
+
+</html>
