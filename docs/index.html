@@ -19,14 +19,14 @@
 
   <body>
   <h1><center>mkappconnect demo</center></h1>
-  <p style="margin:auto 20px;">模拟三方页面跳转回MK页面，支持[schema]、[https]两种协议，js:location.href、js:iframe、a:href 三种跳转方式</p>
+  <p style="margin:auto 20px;">模拟三方页面跳转回MK页面，支持[schema]、[https]两种协议，js:location.href、a:href 两种跳转方式</p>
 	<a class="btn common-blue-btn" href="javascript:;" onclick="test('mkappconnect://?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult')">[schema] js:location.href</a>
-	<a class="btn common-blue-btn" href="javascript:;" onclick="test('mkappconnect://?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult', true)">[schema]js:iframe</a>
+	<!-- <a class="btn common-blue-btn" href="javascript:;" onclick="test('mkappconnect://?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult', true)">[schema]js:iframe</a> -->
 	<a class="btn common-blue-btn" href="mkappconnect://?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult">[schema] a:href</a>
 
 	<div style="margin-top: 50px;"></div>
 	<a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mkappconnect.hellogroup.com/?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult')">[https] js:location.href</a>
-	<a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mkappconnect.hellogroup.com/?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult', true)">[https] js:iframe</a>
+	<!-- <a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mkappconnect.hellogroup.com/?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult', true)">[https] js:iframe</a> -->
 	<a class="btn common-blue-btn" href="https://mkappconnect.hellogroup.com/?a=url&close=1&url=https%3A%2F%2Fmvip.immomo.com%2Ffep%2Fmomo%2Ffep-mk%2FmemberCenter%2Findex.html%3F_bid%3D1000545%23%2Fmember-center-A%2FMemberResult">[https] a:href</a>
 
 	<code style="background:#f5f5f5; display:block; margin: 20px; word-break: break-all;"><script>document.writeln(navigator.userAgent)</script></code>
