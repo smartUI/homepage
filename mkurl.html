@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>三方页面纯净WebView</title>
@@ -27,26 +28,81 @@
 		</ul>
 	</p>
 
-	<p style="margin:auto 20px;">_mk_close=1&_mk_target=1 示例：</p>
-	<a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=1#/member-center-A/MemberResult')">js:location.href</a>
-	<!-- <a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=1#/member-center-A/MemberResult', true)">js:iframe</a> -->
-	<a class="btn common-blue-btn" href="https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=1#/member-center-A/MemberResult">a:href</a>
+	<p style="margin:auto 20px;">
+		<label for="mk_target">_mk_target:</label>
+		<select id="mk_target" style="height: 36px; width: 100%; padding: 0 10px;">
+			<option value="undefined" selected>默认不传这个参数</option>
+			<option value="">传的空值</option>
+			<option value="0">0: 不生效</option>
+			<option value="1">1：在新窗口中打开MK页面</option>
+			<option value="5">5: 在纯净WebView中打开页面</option>
+			<option value="10">非法值10</option>
+			<option value="aa">非法值aa</option>
+		</select>
+	</p>
+	<p style="margin:auto 20px; margin-top: 10px;">
+		<label for="mk_close">_mk_close:</label>
+		<select id="mk_close" style="height: 36px; width: 100%; padding: 0 10px;">
+			<option value="undefined" selected>默认不传这个参数</option>
+			<option value="">传的空值</option>
+			<option value="0">0: 不关闭当前三方页面</option>
+			<option value="1">1: 关闭当前三方页面</option>
+			<option value="10">非法值10</option>
+			<option value="aa">非法值aa</option>
+		</select>
+	</p>
 
+	<p style="margin:auto 20px; margin-top: 10px;">
+		<label for="mk_close">链接带bid参数:</label>
+		<input type="checkbox" id="bid_checkbox" checked>
+	</p>
 
-	<p style="margin:auto 20px;">_mk_close=1&_mk_target=0 示例：</p>
-	<a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=0#/member-center-A/MemberResult')">js:location.href</a>
-	<!-- <a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=0#/member-center-A/MemberResult', true)">js:iframe</a> -->
-	<a class="btn common-blue-btn" href="https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=0#/member-center-A/MemberResult">a:href</a>
+	<a class="btn common-blue-btn" href="javascript:;" onclick="test()">js:location.href</a>
+	<!-- <a class="btn common-blue-btn" href="javascript:;" onclick="test()">js:iframe</a> -->
+	<a class="btn common-blue-btn data-url" href="javascript:;">a:href</a>
 
-	<p style="margin:auto 20px;">_mk_close=0&_mk_target=5 示例：</p>
-	<a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=0&_mk_target=5#/member-center-A/MemberResult')">js:location.href</a>
-	<!-- <a class="btn common-blue-btn" href="javascript:;" onclick="test('https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=0&_mk_target=5#/member-center-A/MemberResult', true)">js:iframe</a> -->
-	<a class="btn common-blue-btn" href="https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=0&_mk_target=5#/member-center-A/MemberResult">a:href</a>
-
+	<p style="background:#f5f5f5; display:block; margin: 20px; word-break: break-all;" id="current_url"></p>
 	<code style="background:#f5f5f5; display:block; margin: 20px; word-break: break-all;"><script>document.writeln(navigator.userAgent)</script></code>
 	<script>
 	  //方法样例
-	  function test(url, iframe = false) {
+	  // 'https://mvip.immomo.com/fep/momo/fep-mk/memberCenter/index.html?_bid=1000545&_mk_close=1&_mk_target=1#/member-center-A/MemberResult'
+
+	  var DEFAULT_URL = 'https://test-s.immomo.com/fep/momo/m-fes-sdk/mk-basic-bridges-demo/momo/ui/openUrl.html';
+	  var CURRENT_URL = DEFAULT_URL;
+	  var mkTargetElement = document.getElementById('mk_target');
+	  var mkCloseElement = document.getElementById('mk_close');
+	  var bidCheckboxElement = document.getElementById('bid_checkbox');
+	  mkTargetElement.addEventListener('change', updateUrl);
+	  mkCloseElement.addEventListener('change', updateUrl);
+	  bidCheckboxElement.addEventListener('change', updateUrl);
+	  updateUrl();
+	  function updateUrl() {
+		var mk_target = mkTargetElement.value;
+		var mk_close = mkCloseElement.value;
+		var hasBid = bidCheckboxElement.checked;
+		console.log('mk_target:', mk_target);
+		console.log('mk_close:', mk_close);
+		var querys = [];
+		if (mk_close!='undefined') {
+			querys.push('_mk_close=' + mk_close);
+		}
+		if (mk_target!='undefined') {
+			querys.push('_mk_target=' + mk_target);
+		}
+		if (hasBid) {
+			querys.push('_bid=1001374');
+		}
+		if (querys.length > 0) {
+			CURRENT_URL = 'https://test-s.immomo.com/fep/momo/m-fes-sdk/mk-basic-bridges-demo/momo/ui/openUrl.html?' + querys.join('&');
+		} else {
+			CURRENT_URL = DEFAULT_URL;
+		}
+		document.querySelectorAll('.data-url').forEach(item => {
+			item.href = CURRENT_URL;
+		});
+		document.getElementById('current_url').textContent = CURRENT_URL;
+	  }
+	  function test(iframe = false) {
 			if (iframe) {
 				const iframe = document.createElement('iframe');
 				iframe.style.position = 'absolute';
@@ -56,13 +112,13 @@
 				iframe.style.height = '1px';
 				iframe.style.opacity = '0';
 				iframe.style.visibility = 'hidden';
-				iframe.src = url;
+				iframe.src = CURRENT_URL;
 				document.body.appendChild(iframe);
 				setTimeout(() => {
 					document.body.removeChild(iframe);
 				}, 2000);
 			} else {
-				location.href = url;
+				location.href = CURRENT_URL;
 			}
     }
   </script>
